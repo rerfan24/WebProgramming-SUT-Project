@@ -11,6 +11,7 @@ import Login from "./pages/Login";
 import Registration from "./pages/Registration";
 import PageNotFound from "./pages/PageNotFound";
 import GCounter from "./pages/GCounter"
+import CreateCounter from "./pages/CreateCounter";
 
 function App() {
   let [isDarkMode, setIsDarkMode] = useState(false);
@@ -76,6 +77,7 @@ function App() {
                   <Link to="/">Home Page</Link>
                 </>
               )}
+              {authState.status && <Link to="/create"> Create Countdown</Link>}
               {authState.status && <Link to="/" onClick={logout}> Logout</Link>}
             </div>
             <h1>{authState.username} </h1>
@@ -101,6 +103,7 @@ function App() {
           <Route path="/" exact component={Home} />
           <Route path="/login" exact component={Login} />
           <Route path="/registration" exact component={Registration} />
+          <Route path="/create" exact component={CreateCounter} />
           <Route path="/global/:id" exact component={GCounter} />
           <Route path="*" exact component={PageNotFound}/>
         </Switch>
