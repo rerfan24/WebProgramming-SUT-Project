@@ -1,0 +1,123 @@
+:root,
+[data-theme="light"] {
+  --back-color: #ffffff;
+  --front-color: #292929;
+  --error-content: #b00020;
+  --purple-theme: #6200ee;
+}
+
+/* Dark Mode Theme */
+[data-theme="dark"] {
+  --back-color: #292929;
+  --front-color: #ffffff;
+  --error-content: #cf6679;
+  --purple-theme: #bb86fc;
+}
+html {
+  background-color: var(--back-color);
+  box-sizing: border-box;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.App {
+  text-align: center;
+}
+
+.navbar {
+  width: 100%;
+  height: 70px;
+  display: flex;
+  align-items: center;
+  font-family: Arial, Helvetica, sans-serif;
+  border-bottom: 2px solid var(--purple-theme);
+}
+.navbar .links {
+  flex: 50%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.navbar a {
+  margin-left: 20px;
+  text-decoration: none;
+  color: var(--purple-theme);
+}
+
+.navbar a:hover {
+  /* border-bottom: 1px solid #7949e9; */
+  font-weight: bold;
+}
+
+.navbar .dark-mode-icon {
+  cursor: pointer;
+  color: var(--front-color);
+  margin-right: 2vw;
+}
+
+.navbar .light-mode-icon {
+  cursor: pointer;
+  color: var(--front-color);
+  margin-right: 2vw;
+}
+
+#wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#wrap h4 {
+  color: var(--error-content);
+  display: block;
+}
+
+.formContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 500px;
+  height: auto;
+  padding: 20px;
+  border-radius: 5px;
+}
+
+.formContainer label {
+  color: var(--front-color);
+}
+
+.formContainer #inputCreatePost {
+  height: 40px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  box-shadow: 0 1px 2px 0 var(--front-color), 0 2px 3px 0 var(--front-color);
+  border-radius: 5px;
+  padding-left: 10px;
+  font-size: 20px;
+}
+
+.formContainer button {
+  margin-top: 15px;
+  height: 40px;
+  border: none;
+  background-color: var(--purple-theme);
+  box-shadow: 0 2px 3px 0 var(--purple-theme), 0 3px 4px 0 var(--back-color);
+  border-radius: 5px;
+  color: #ffffff;
+  cursor: pointer;
+}
+
+.formContainer button:hover {
+  background-color: #994ce6;
+  box-shadow: 0px 15px 20px rgba(117, 15, 185, 0.4);
+  /* background-color: #2ee59d;
+  box-shadow: 0px 15px 20px rgba(46, 229, 157, 0.4); */
+  color: #fff;
+  cursor: pointer;
+  transform: translateY(-7px);
+}
+
+span {
+  color: var(--error-content);
+  display: block;
+}
