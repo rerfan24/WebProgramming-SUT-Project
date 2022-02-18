@@ -31,6 +31,7 @@ function Login() {
         setAuthState({
           username: response.data.username,
           id: response.data.id,
+          photo: response.data.photo,
           status: true,
         });
         history.push("/");

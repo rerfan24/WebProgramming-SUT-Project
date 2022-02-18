@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const { Users } = require("../models");
 const bcrypt = require("bcrypt");
+const multer = require("multer");
 const { validateToken } = require("../middlewares/AuthMiddleware");
 const { sign } = require("jsonwebtoken");
 
@@ -45,7 +46,7 @@ router.post("/login", async (req, res) => {
         { username: user.username, id: user.id },
         "importantsecret"
       );
-      res.json({ token: accessToken, username: username, id: user.id });
+      res.json({ token: accessToken, username: username, id: user.id, photo: user.photo });
       }
     });
   }

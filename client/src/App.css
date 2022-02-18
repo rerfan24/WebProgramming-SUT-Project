@@ -134,3 +134,39 @@ span {
   color: var(--error-content);
   display: block;
 }
+
+.counters {
+  display: flex;
+  justify-content: center;
+  flex-flow: wrap;
+}
+
+.counter {
+  display: inline;
+  width: 29%;
+  min-width: 29%;
+  display: flex;
+  flex-direction: column;
+  border-bottom: 1px solid var(--purple-theme);
+  margin: 2vh 2vw;
+}
+
+.counter .title {
+  display: inline;
+  color: var(--back-color);
+  background-color: var(--purple-theme);
+  padding: 10px;
+  border-radius: 10%;
+}
+
+.counter .body {
+  justify-content: center;
+  text-align: center;
+  cursor: pointer;
+  height: 5vh;
+  color: var(--front-color);
+}
+
+.counter span {
+  color: var(--purple-theme);
+}

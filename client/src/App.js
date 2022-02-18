@@ -10,12 +10,14 @@ import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Registration from "./pages/Registration";
 import PageNotFound from "./pages/PageNotFound";
+import GCounter from "./pages/GCounter"
 
 function App() {
   let [isDarkMode, setIsDarkMode] = useState(false);
   const [authState, setAuthState] = useState({
     username: "",
     id: 0,
+    photo: "",
     status: false,
   });
   
@@ -45,11 +47,17 @@ function App() {
           setAuthState({
             username: response.data.username,
             id: response.data.id,
+            photo: response.data.photo,
             status: true,
           });
         }
       });
   }, []);
+
+  const logout = () => {
+    localStorage.removeItem("accessToken");
+    setAuthState({ username: "", id: 0, status: false });
+  }
 
   return (
     <div className="App">
@@ -68,7 +76,9 @@ function App() {
                   <Link to="/">Home Page</Link>
                 </>
               )}
+              {authState.status && <Link to="/" onClick={logout}> Logout</Link>}
             </div>
+            <h1>{authState.username} </h1>
           {isDarkMode ? 
             (<> 
               <DarkModeIcon
@@ -91,6 +101,7 @@ function App() {
           <Route path="/" exact component={Home} />
           <Route path="/login" exact component={Login} />
           <Route path="/registration" exact component={Registration} />
+          <Route path="/global/:id" exact component={GCounter} />
           <Route path="*" exact component={PageNotFound}/>
         </Switch>
       </Router>
