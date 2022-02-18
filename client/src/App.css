@@ -38,7 +38,19 @@ html {
   align-items: center;
 }
 
+.page404 h1 {
+  display: inline;
+}
+
+.page404 h1,
+.page404 h3 {
+  color: var(--front-color);
+  text-align: center;
+}
+
+.page404 a,
 .navbar a {
+  text-align: center;
   margin-left: 20px;
   text-decoration: none;
   color: var(--purple-theme);
@@ -49,16 +61,17 @@ html {
   font-weight: bold;
 }
 
-.navbar .dark-mode-icon {
-  cursor: pointer;
+.page404 .bottom-hour-glass,
+.page404 .top-hour-glass,
+.navbar .dark-mode-icon,
+.navbar .light-mode-icon {
   color: var(--front-color);
   margin-right: 2vw;
 }
 
+.navbar .dark-mode-icon,
 .navbar .light-mode-icon {
   cursor: pointer;
-  color: var(--front-color);
-  margin-right: 2vw;
 }
 
 #wrap {

@@ -9,6 +9,7 @@ import axios from "axios";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Registration from "./pages/Registration";
+import PageNotFound from "./pages/PageNotFound";
 
 function App() {
   let [isDarkMode, setIsDarkMode] = useState(false);
@@ -90,6 +91,7 @@ function App() {
           <Route path="/" exact component={Home} />
           <Route path="/login" exact component={Login} />
           <Route path="/registration" exact component={Registration} />
+          <Route path="*" exact component={PageNotFound}/>
         </Switch>
       </Router>
       </AuthContext.Provider>
