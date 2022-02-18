@@ -86,7 +86,7 @@ html {
   color: var(--front-color);
 }
 
-.formContainer #inputCreatePost {
+.formContainer .inputCreatePost {
   height: 40px;
   margin-top: 10px;
   margin-bottom: 10px;

@@ -3,6 +3,8 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import axios from "axios";
 import { useState } from "react";
+import { useEffect } from "react";
+import { useHistory } from "react-router-dom";
 
 function Registration() {
   const initialValues = {
@@ -11,6 +13,8 @@ function Registration() {
     email: "",
   };
 
+  let history = useHistory();
+
   const [error, setError] = useState("");
 
   const validationSchema = Yup.object().shape({
@@ -18,6 +22,12 @@ function Registration() {
     password: Yup.string().min(8, 'Password Cannot be less than 8 charachters').max(20).required('Password is required'),
     email: Yup.string().email('Must be a valid email').required('Email is required'),
   });
+
+  useEffect(() => {
+    if (localStorage.length !== 0) {
+      history.push("/")
+    }
+  }, []);
 
   const onSubmit = (data) => {
     axios.post("http://localhost:3001/users/auth", data).then(response => {
@@ -44,9 +54,9 @@ function Registration() {
             <ErrorMessage name="username" component="span" />
             <Field
               autoComplete="off"
-              id="inputCreatePost"
+              className="inputCreatePost"
               name="username"
-              placeholder="(Ex. John123...)"
+              placeholder="(Ex. myName123...)"
             />
 
           <label>Password: </label>
@@ -54,7 +64,7 @@ function Registration() {
             <Field
               autoComplete="off"
               type="password"
-              id="inputCreatePost"
+              className="inputCreatePost"
               name="password"
               placeholder="Your Password..."
             />
@@ -64,7 +74,7 @@ function Registration() {
             <Field
               autoComplete="off"
               type="email"
-              id="inputCreatePost"
+              className="inputCreatePost"
               name="email"
               placeholder="Your emial..."
             />

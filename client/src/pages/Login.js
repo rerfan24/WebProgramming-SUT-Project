@@ -1,43 +1,74 @@
-import React, { useState, useContext } from "react";
+import React, { useContext } from "react";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
 import { AuthContext } from "../helpers/AuthContext";
+import { Formik, Form, Field, ErrorMessage } from "formik";
+import { useState, useEffect } from "react";
 
 function Login() {
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
-  const { setAuthState } = useContext(AuthContext);
+  const initialValues = {
+    username: "",
+    password: "",
+  };
+
+  const [error, setError] = useState("");
+  let { setAuthState } = useContext(AuthContext);
 
   let history = useHistory();
 
-  const login = () => {
-    
+  useEffect(() => {
+    if (localStorage.length !== 0) {
+      history.push("/")
+    }
+  }, []);
+
+  const login = (data) => {
+    axios.post("http://localhost:3001/users/login", data).then((response) => {
+      if (response.data.error) {
+        setError(response.data.error);
+      } else {
+        localStorage.setItem("accessToken", response.data.token);
+        setAuthState({
+          username: response.data.username,
+          id: response.data.id,
+          status: true,
+        });
+        history.push("/");
+      }
+    });
   }
 
   return (
     <div id="wrap">
-    <div className="formContainer">
-      <label>Username:</label>
-      <input 
-        id="inputCreatePost"
-        type="text"
-        placeholder="Username"
-        onChange={(event) => {
-          setUsername(event.target.value);
-        }}
-      />
-      <label>Password:</label>
-      <input
-        id="inputCreatePost"
-        type="password"
-        placeholder="Your Password..."
-        onChange={(event) => {
-          setPassword(event.target.value);
-        }}
-      />
+      <div className="input-content-wrap">
+      <Formik
+        initialValues={initialValues}
+        onSubmit={login}
+      >
+        <Form className="formContainer">
+          <label>Username: </label>
+            <ErrorMessage name="username" component="span" />
+            <Field
+              autoComplete="off"
+              className="inputCreatePost"
+              name="username"
+              placeholder="(Ex. myName123...)"
+            />
 
-      <button onClick={login}> Login </button>
+          <label>Password: </label>
+            <ErrorMessage name="password" component="span" />
+            <Field
+              autoComplete="off"
+              type="password"
+              className="inputCreatePost"
+              name="password"
+              placeholder="Your Password..."
+            />
+            <button type="submit">Login</button>
+          </Form>
+        </Formik>
     </div>
+    <h4>{error}</h4>
     </div>
   )
 }
