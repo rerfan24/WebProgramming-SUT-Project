@@ -1,9 +1,9 @@
 const express = require("express");
 const router = express.Router();
-const { Users } = require("../models");
+const { Users, OCounters } = require("../models");
 const bcrypt = require("bcrypt");
 const multer = require("multer");
-const { validateToken } = require("../middlewares/AuthMiddleware");
+const { validateToken, setToken} = require("../middlewares/AuthMiddleware");
 const { sign } = require("jsonwebtoken");
 
 router.post("/auth", async (req, res) => {
@@ -35,7 +35,7 @@ router.post("/login", async (req, res) => {
   console.log(req.body)
   const { username, password } = req.body;
 
-  const user = await Users.findOne({ where: { username: username } });
+  const user = await Users.findOne({ where: { username: username }, include: [OCounters] });
 
   if (!user) res.json({ error: "User Doesn't Exist" });
   else {
@@ -46,7 +46,8 @@ router.post("/login", async (req, res) => {
         { username: user.username, id: user.id },
         "importantsecret"
       );
-      res.json({ token: accessToken, username: username, id: user.id, photo: user.photo });
+      setToken("importantsecret")
+      res.json({ token: accessToken, username: username, id: user.id, photo: user.photo, Ocounters: user.OCounters });
       }
     });
   }

@@ -1,5 +1,5 @@
 import "./App.css";
-import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch, Link, useHistory } from "react-router-dom";
 import DarkModeIcon from '@mui/icons-material/DarkMode';
 import LightModeIcon from '@mui/icons-material/LightMode';
 import { useState, useEffect } from "react";
@@ -15,10 +15,12 @@ import CreateCounter from "./pages/CreateCounter";
 
 function App() {
   let [isDarkMode, setIsDarkMode] = useState(false);
+  let history = useHistory();
   const [authState, setAuthState] = useState({
     username: "",
     id: 0,
     photo: "",
+    OCounters: [],
     status: false,
   });
   
@@ -49,6 +51,7 @@ function App() {
             username: response.data.username,
             id: response.data.id,
             photo: response.data.photo,
+            OCounters: response.data.OCounters,
             status: true,
           });
         }
@@ -58,6 +61,7 @@ function App() {
   const logout = () => {
     localStorage.removeItem("accessToken");
     setAuthState({ username: "", id: 0, status: false });
+    document.location.reload()
   }
 
   return (

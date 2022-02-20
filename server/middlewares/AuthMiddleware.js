@@ -1,5 +1,11 @@
 const { verify } = require("jsonwebtoken");
 
+let token = "";
+
+const setToken = (content) => {
+  token = content;
+}
+
 const validateToken = (req, res, next) => {
   const accessToken = req.header("accessToken");
 
@@ -16,4 +22,4 @@ const validateToken = (req, res, next) => {
   }
 };
 
-module.exports = { validateToken };
+module.exports = { validateToken,  setToken};

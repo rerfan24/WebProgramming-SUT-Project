@@ -1,13 +1,17 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { useHistory, useParams } from 'react-router-dom'
 
 function GCounter() {
     const { id } = useParams();
     const [counter, setCounter] = useState(0);
     const [counterShow, setCounterShow] = useState("");
+    let history = useHistory();
 
     useEffect(()=> {
+        if (!localStorage.getItem("accessToken")) {
+            history.push("/");
+        }
         axios.get(`http://localhost:3001/global/${id}`).then((response) => {
             console.log()
             const deadline = new Date(response.data.year, response.data.month, response.data.day, response.data.hour, response.data.minute, response.data.second, 0)

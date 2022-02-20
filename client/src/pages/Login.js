@@ -17,7 +17,7 @@ function Login() {
   let history = useHistory();
 
   useEffect(() => {
-    if (localStorage.length !== 0) {
+    if (localStorage.getItem("accessToken")) {
       history.push("/")
     }
   }, []);
@@ -32,6 +32,7 @@ function Login() {
           username: response.data.username,
           id: response.data.id,
           photo: response.data.photo,
+          OCounters: response.data.OCounters,
           status: true,
         });
         history.push("/");
@@ -51,6 +52,7 @@ function Login() {
             <ErrorMessage name="username" component="span" />
             <Field
               autoComplete="off"
+              required
               className="inputCreatePost"
               name="username"
               placeholder="(Ex. myName123...)"
@@ -60,6 +62,7 @@ function Login() {
             <ErrorMessage name="password" component="span" />
             <Field
               autoComplete="off"
+              required
               type="password"
               className="inputCreatePost"
               name="password"
@@ -68,8 +71,8 @@ function Login() {
             <button type="submit">Login</button>
           </Form>
         </Formik>
+        <h4>{error}</h4>
     </div>
-    <h4>{error}</h4>
     </div>
   )
 }

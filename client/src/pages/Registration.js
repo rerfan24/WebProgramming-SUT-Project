@@ -24,7 +24,7 @@ function Registration() {
   });
 
   useEffect(() => {
-    if (localStorage.length !== 0) {
+    if (localStorage.getItem("accessToken")) {
       history.push("/")
     }
   }, []);

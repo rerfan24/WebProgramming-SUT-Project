@@ -80,7 +80,8 @@ html {
   justify-content: center;
 }
 
-#wrap h4 {
+#wrap h4,
+.createCounterPage h5 {
   color: var(--error-content);
   display: block;
 }
@@ -95,11 +96,13 @@ html {
   border-radius: 5px;
 }
 
-.formContainer label {
+.formContainer label,
+.createCounterPage label {
   color: var(--front-color);
 }
 
-.formContainer .inputCreatePost {
+.formContainer .inputCreatePost,
+.createCounterPage .inputCreatePost {
   height: 40px;
   margin-top: 10px;
   margin-bottom: 10px;
@@ -109,7 +112,8 @@ html {
   font-size: 20px;
 }
 
-.formContainer button {
+.formContainer button,
+.createCounterPage .counter-btn {
   margin-top: 15px;
   height: 40px;
   border: none;
@@ -120,7 +124,8 @@ html {
   cursor: pointer;
 }
 
-.formContainer button:hover {
+.formContainer button:hover,
+.createCounterPage .counter-btn:hover {
   background-color: #994ce6;
   box-shadow: 0px 15px 20px rgba(117, 15, 185, 0.4);
   /* background-color: #2ee59d;
@@ -168,5 +173,18 @@ span {
 }
 
 .counter span {
+  color: var(--purple-theme);
+}
+
+.date-picker,
+.time-picker {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--purple-theme);
+  border-radius: 10%;
+}
+
+.Calendar__monthArrow {
   color: var(--purple-theme);
 }
