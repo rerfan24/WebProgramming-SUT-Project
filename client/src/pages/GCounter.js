@@ -5,7 +5,11 @@ import { useHistory, useParams } from 'react-router-dom'
 function GCounter() {
     const { id } = useParams();
     const [counter, setCounter] = useState(0);
-    const [counterShow, setCounterShow] = useState("");
+    const [titleCounterShow, setTitleCounterShow] = useState("");
+    const [dayCounterShow, setDayCounterShow] = useState("");
+    const [hourCounterShow, setHourCounterShow] = useState("");
+    const [minuteCounterShow, setMinuteCounterShow] = useState("");
+    const [secondCounterShow, setSecondCounterShow] = useState("");
     let history = useHistory();
 
     useEffect(()=> {
@@ -15,6 +19,7 @@ function GCounter() {
         axios.get(`http://localhost:3001/global/${id}`).then((response) => {
             console.log()
             const deadline = new Date(response.data.year, response.data.month, response.data.day, response.data.hour, response.data.minute, response.data.second, 0)
+            setTitleCounterShow(response.data.title)
             setCounter(deadline.getTime());
         })
     }, []);
@@ -32,18 +37,49 @@ function GCounter() {
         var seconds = Math.floor((distance % (1000 * 60)) / 1000);
           
         // Output the result in an element with id="demo"
-        setCounterShow(days + "d " + hours + "h " + minutes + "m " + seconds + "s ");
-          
+        setDayCounterShow(days)
+        setHourCounterShow(hours)
+        setMinuteCounterShow(minutes)
+        setSecondCounterShow(seconds)
         // If the count down is over, write some text 
         if (distance < 0) {
-          clearInterval();
-          setCounterShow("EXPIRED");
+            clearInterval();
+            setDayCounterShow(0)
+            setHourCounterShow(0)
+            setMinuteCounterShow(0)
+            setSecondCounterShow(0)
         }
     }, 1000);
 
     return (
         <div>
-            <div className='countdown'> { counterShow }</div>
+            <h1 className='title-counter'> { titleCounterShow } </h1>
+        <div className='countdown'>
+            <div className='day-countdown'>
+                 <h2>{ dayCounterShow }</h2>
+                 <h4>
+                     Days
+                 </h4>
+            </div>
+            <div className='hour-countdown'>
+                <h2>{ hourCounterShow }</h2>
+                 <h4>
+                     Hours
+                 </h4>
+            </div>
+            <div className='minute-countdown'>
+                <h2>{ minuteCounterShow }</h2>
+                 <h4>
+                     Minutes
+                 </h4>
+            </div>
+            <div className='second-countdown'>
+                <h2>{ secondCounterShow }</h2>
+                <h4>
+                     Seconds
+                 </h4>
+            </div>
+        </div>
         </div>
     )
 }

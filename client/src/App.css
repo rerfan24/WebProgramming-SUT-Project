@@ -198,6 +198,26 @@ span {
   color: var(--purple-theme);
 }
 
-.countdown {
+.title-counter {
   color: var(--front-color);
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+}
+
+.countdown {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.countdown .day-countdown,
+.countdown .hour-countdown,
+.countdown .minute-countdown,
+.countdown .second-countdown {
+  background-color: var(--front-color);
+  color: var(--back-color);
+  padding: 10px;
+  min-height: 10vh;
+  min-width: 10vw;
+  margin: 5vh 1vw;
 }

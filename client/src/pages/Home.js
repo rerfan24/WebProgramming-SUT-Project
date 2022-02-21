@@ -38,13 +38,18 @@ function Home() {
 
 
   return (
-    <di className='counters-above'>
+    <div className='counters-above'>
       <h2> Global Counters </h2>
       <div className="counters">
       {listOfCounters.map((value, key) => {
         return (
           <div key={key} className="counter">
-            <div className="title"> {value.title} </div>
+            <div 
+              className="title"
+              style={{backgroundImage: `url(${value.photo})`}}  
+            >
+                {value.title} 
+            </div>
             <div
               className="body"
               onClick={() => {
@@ -79,7 +84,7 @@ function Home() {
         );
       })}
       </div>
-    </di>
+    </div>
   )
 }
 
