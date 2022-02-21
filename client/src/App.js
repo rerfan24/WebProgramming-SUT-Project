@@ -11,6 +11,7 @@ import Login from "./pages/Login";
 import Registration from "./pages/Registration";
 import PageNotFound from "./pages/PageNotFound";
 import GCounter from "./pages/GCounter"
+import OCounter from "./pages/OCounter";
 import CreateCounter from "./pages/CreateCounter";
 
 function App() {
@@ -111,6 +112,7 @@ function App() {
           <Route path="/registration" exact component={Registration} />
           <Route path="/create" exact component={CreateCounter} />
           <Route path="/global/:id" exact component={GCounter} />
+          <Route path="/own/:id" exact component={OCounter} />
           <Route path="*" exact component={PageNotFound}/>
         </Switch>
       </Router>

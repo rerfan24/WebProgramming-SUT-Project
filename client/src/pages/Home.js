@@ -73,7 +73,7 @@ function Home() {
             <div
               className="body"
               onClick={() => {
-                history.push(`/global/${value.id}`);
+                history.push(`/own/${value.id}`);
               }}
             >
               {value.year}
