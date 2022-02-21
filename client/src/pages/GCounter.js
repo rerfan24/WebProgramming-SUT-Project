@@ -43,7 +43,7 @@ function GCounter() {
 
     return (
         <div>
-            <div> { counterShow }</div>
+            <div className='countdown'> { counterShow }</div>
         </div>
     )
 }

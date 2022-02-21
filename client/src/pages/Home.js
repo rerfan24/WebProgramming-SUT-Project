@@ -5,9 +5,10 @@ import { Link, useHistory } from "react-router-dom";
 import { AuthContext } from "../helpers/AuthContext";
 
 function Home() {
-
+  const { authState } = useContext(AuthContext);
   const [listOfCounters, setlistOfCounters] = useState([]);
   const [listOfOCounters, setlistOfOCounters] = useState([]);
+  const [loading, setLoading] = useState(false);
   let history = useHistory();
 
   useEffect(() => {
@@ -22,13 +23,24 @@ function Home() {
       })
       .then((response) => {
         if (!response.data.error) {
-          setlistOfOCounters(response.data.listOfOCounters)
+          let list = []
+          for (let i = 0; i < response.data.listOfOCounters.length; i++) {
+            if (response.data.listOfOCounters[i].UserId === authState.id) {
+              list.push(response.data.listOfOCounters[i]);
+            }
+          }
+          setlistOfOCounters(list)
+          setLoading(true);
         }
     });
-  }, []);
+    
+  }, [loading]);
+
 
   return (
-    <div className="counters">
+    <di className='counters-above'>
+      <h2> Global Counters </h2>
+      <div className="counters">
       {listOfCounters.map((value, key) => {
         return (
           <div key={key} className="counter">
@@ -46,6 +58,9 @@ function Home() {
           </div>
         );
       })}
+      </div>
+      {authState.status && <h2> Your Counters </h2>}
+      <div className="counters">
       {listOfOCounters.map((value, key) => {
         return (
           <div key={key} className="counter">
@@ -63,7 +78,8 @@ function Home() {
           </div>
         );
       })}
-    </div>
+      </div>
+    </di>
   )
 }
 

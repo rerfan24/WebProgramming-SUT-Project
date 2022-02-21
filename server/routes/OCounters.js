@@ -14,9 +14,10 @@ router.get("/:id", async (req, res) => {
     res.json(counter);
 });
   
-router.post("/add", async (req, res) => {
+router.post("/add", validateToken, async (req, res) => {
     const counter = req.body;
     counter.photo = "picture/global/christmas.jpg";
+    counter.UserId = req.user.id;
     await OCounters.create(counter);
     res.json(counter);
 });

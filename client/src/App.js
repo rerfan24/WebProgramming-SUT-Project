@@ -15,6 +15,7 @@ import CreateCounter from "./pages/CreateCounter";
 
 function App() {
   let [isDarkMode, setIsDarkMode] = useState(false);
+  const [loading, setLoading] = useState(false);
   let history = useHistory();
   const [authState, setAuthState] = useState({
     username: "",
@@ -55,8 +56,9 @@ function App() {
             status: true,
           });
         }
+      setLoading(true)
       });
-  }, []);
+  }, [loading]);
 
   const logout = () => {
     localStorage.removeItem("accessToken");
@@ -84,7 +86,7 @@ function App() {
               {authState.status && <Link to="/create"> Create Countdown</Link>}
               {authState.status && <Link to="/" onClick={logout}> Logout</Link>}
             </div>
-            <h1>{authState.username} </h1>
+            <h1> {authState.username} </h1>
           {isDarkMode ? 
             (<> 
               <DarkModeIcon
